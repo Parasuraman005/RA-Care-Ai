@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile and health settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastAssessmentDate": { "type": "string", "format": "date-time" },
+        "riskLevel": { "type": "string", "enum": ["Low", "Moderate", "High", "Unknown"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "SymptomLog": {
+      "title": "Symptom Log",
+      "description": "Daily symptom and lifestyle log",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "painLevel": { "type": "integer", "description": "0-10 scale" },
+        "swellingLevel": { "type": "integer", "description": "0-10 scale" },
+        "stiffnessDuration": { "type": "integer", "description": "Minutes of morning stiffness" },
+        "fatigueLevel": { "type": "integer", "description": "0-10 scale" },
+        "mood": { "type": "string" },
+        "sleepHours": { "type": "number" },
+        "exerciseMinutes": { "type": "integer" },
+        "waterIntakeCups": { "type": "integer" },
+        "notes": { "type": "string" }
+      },
+      "required": ["userId", "date"]
+    },
+    "Medication": {
+      "title": "Medication",
+      "description": "Medication schedule and details",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "dosage": { "type": "string" },
+        "frequency": { "type": "string" },
+        "timeOfDay": { "type": "array", "items": { "type": "string" } },
+        "active": { "type": "boolean" },
+        "startDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Medical appointment details",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "doctorName": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "location": { "type": "string" },
+        "notes": { "type": "string" },
+        "reminderSent": { "type": "boolean" }
+      },
+      "required": ["userId", "doctorName", "date"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles"
+    },
+    "symptoms/{logId}": {
+      "schema": "SymptomLog",
+      "description": "Daily symptom logs"
+    },
+    "medications/{medId}": {
+      "schema": "Medication",
+      "description": "User medications"
+    },
+    "appointments/{appId}": {
+      "schema": "Appointment",
+      "description": "Medical appointments"
+    }
+  }
+}

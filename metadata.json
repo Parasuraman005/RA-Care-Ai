@@ -1,0 +1,6 @@
+{
+  "name": "RA Care AI",
+  "description": "AI-Powered Rheumatoid Arthritis Detection & Disease Management System with Gemini AI assessment, symptom tracking, and health education.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
